@@ -1,0 +1,5 @@
+**/.terraform/
+.DS_Store
+**/.terragrunt-cache
+**/.terraform.lock.hcl
+**/.env
