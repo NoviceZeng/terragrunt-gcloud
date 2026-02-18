@@ -1,0 +1,7 @@
+name,hostname,machine_type,zone,ip,role
+prod-web-server-01,web01.prod.example.com,e2-standard-2,us-central1-a,10.1.1.10,web
+prod-web-server-02,web02.prod.example.com,e2-standard-2,us-central1-b,10.1.1.11,web
+prod-app-server-01,app01.prod.example.com,e2-standard-4,us-central1-a,10.1.1.20,app
+prod-app-server-02,app02.prod.example.com,e2-standard-4,us-central1-b,10.1.1.21,app
+prod-db-server-01,db01.prod.example.com,n2-standard-8,us-central1-a,10.1.1.30,database
+prod-db-server-02,db02.prod.example.com,n2-standard-8,us-central1-b,10.1.1.31,database
