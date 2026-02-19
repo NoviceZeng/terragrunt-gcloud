@@ -31,20 +31,16 @@ terraform-gcloud/
 ├── terraform-modules/          # 🔧 Reusable Terraform modules
 │   ├── gcp-vm/                # VMs
 │   ├── gcp-gke/               # GKE
-│   ├── gcp-cloudsql/          # Cloud SQL
 │   └── gcp-iam-roles/         # IAM Roles
 ├── terragrunt/                # ⚙️  Configurations
+│   ├── shared/                # 🌐 Shared resources (IAM)
 │   ├── us-central1/
 │   │   ├── dev/
 │   │   │   ├── vms/
-│   │   │   ├── gke/
-│   │   │   ├── database/
-│   │   │   └── iam/
+│   │   │   └── gke/
 │   │   └── prod/
 │   │       ├── vms/
-│   │       ├── gke/
-│   │       ├── database/
-│   │       └── iam/
+│   │       └── gke/
 │   └── us-east1/
 │       └── ... (similar structure)
 └── ORGANIZATION.md            # 📋 Organization guide
@@ -56,16 +52,14 @@ Each resource gets its own state file in GCS bucket (`acme-terraform-state-prod`
 
 ```
 gs://acme-terraform-state-prod/
+├── shared/
+│   └── iam/terraform.tfstate              # ✅ IAM roles (shared)
 ├── us-central1/dev/
 │   ├── vms/terraform.tfstate              # ✅ VM instances
-│   ├── gke/terraform.tfstate              # ✅ GKE clusters
-│   ├── database/terraform.tfstate         # ✅ Cloud SQL
-│   └── iam/terraform.tfstate              # ✅ IAM roles
+│   └── gke/terraform.tfstate              # ✅ GKE clusters
 ├── us-central1/prod/
 │   ├── vms/terraform.tfstate
-│   ├── gke/terraform.tfstate
-│   ├── database/terraform.tfstate
-│   └── iam/terraform.tfstate
+│   └── gke/terraform.tfstate
 └── us-east1/prod/
     └── ... (similar structure)
 ```
