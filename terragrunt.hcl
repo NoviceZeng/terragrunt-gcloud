@@ -17,6 +17,7 @@ remote_state {
     #   - terragrunt-us-central1-prod-gke
     workspaces = {
       name = "terragrunt-${replace(path_relative_to_include(), "/", "-")}"
+    name = "terragrunt-gcp-iam-roles"
     }
   }
   

@@ -5,7 +5,7 @@ include "root" {
 
 # Use both VM and Storage IAM modules together
 terraform {
-  source = "../../../terraform-modules/gcp-iam-roles-combined"
+  source = "../../../terraform-modules/gcp-iam-roles/all-in-one"
 }
 
 # All IAM role assignments in one place
