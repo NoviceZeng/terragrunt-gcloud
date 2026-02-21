@@ -23,30 +23,6 @@ resource "google_project_iam_custom_role" "vm_viewer" {
   project = var.project_id
 }
 
-# VM Operator - Start/stop and reboot VMs
-resource "google_project_iam_custom_role" "vm_operator" {
-  role_id     = "vm-operator"
-  title       = "VM Operator"
-  description = "Can start, stop, reboot, and view compute instances"
-  
-  permissions = [
-    # View permissions
-    "compute.instances.get",
-    "compute.instances.list",
-    "compute.instances.getSerialPortOutput",
-    "compute.zones.get",
-    "compute.zones.list",
-    
-    # Instance lifecycle
-    "compute.instances.start",
-    "compute.instances.stop",
-    "compute.instances.reset",
-  ]
-  
-  stage   = "GA"
-  project = var.project_id
-}
-
 # VM Admin - Full control over VMs
 resource "google_project_iam_custom_role" "vm_admin" {
   role_id     = "vm-admin"
@@ -148,60 +124,12 @@ resource "google_project_iam_custom_role" "vm_developer" {
   project = var.project_id
 }
 
-# VM SSH Access - SSH into VMs only
-resource "google_project_iam_custom_role" "vm_ssh" {
-  role_id     = "vm-ssh"
-  title       = "VM SSH Access"
-  description = "SSH access to compute instances without modification permissions"
-  
-  permissions = [
-    "compute.instances.get",
-    "compute.instances.list",
-    "compute.instances.getSerialPortOutput",
-    "compute.instances.osLogin",
-    "compute.zones.get",
-    "compute.zones.list",
-  ]
-  
-  stage   = "GA"
-  project = var.project_id
-}
-
-# VM Snapshot Manager - Create and manage snapshots
-resource "google_project_iam_custom_role" "vm_snapshot_manager" {
-  role_id     = "vm-snapshot-manager"
-  title       = "VM Snapshot Manager"
-  description = "Create, delete, and manage disk snapshots for backup"
-  
-  permissions = [
-    # View permissions
-    "compute.disks.get",
-    "compute.disks.list",
-    "compute.zones.get",
-    "compute.zones.list",
-    
-    # Snapshot operations
-    "compute.snapshots.create",
-    "compute.snapshots.delete",
-    "compute.snapshots.get",
-    "compute.snapshots.list",
-    "compute.snapshots.useReadOnly",
-    "compute.snapshots.setLabels",
-  ]
-  
-  stage   = "GA"
-  project = var.project_id
-}
-
 # Role assignments map for lookup
 locals {
   vm_roles_map = {
-    "vm-viewer"              = google_project_iam_custom_role.vm_viewer
-    "vm-operator"            = google_project_iam_custom_role.vm_operator
-    "vm-admin"               = google_project_iam_custom_role.vm_admin
-    "vm-developer"           = google_project_iam_custom_role.vm_developer
-    "vm-ssh"                 = google_project_iam_custom_role.vm_ssh
-    "vm-snapshot-manager"    = google_project_iam_custom_role.vm_snapshot_manager
+    "vm-viewer"    = google_project_iam_custom_role.vm_viewer
+    "vm-admin"     = google_project_iam_custom_role.vm_admin
+    "vm-developer" = google_project_iam_custom_role.vm_developer
   }
 }
 
