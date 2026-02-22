@@ -8,7 +8,7 @@ remote_state {
   
   config = {
     # Your Terraform Cloud organization name
-    organization = "acme-org"
+    organization = "novice-zeng-org"
     
     # Workspace naming: Uses path to create unique workspace per service
     # Examples:
@@ -17,7 +17,6 @@ remote_state {
     #   - terragrunt-us-central1-prod-gke
     workspaces = {
       name = "terragrunt-${replace(path_relative_to_include(), "/", "-")}"
-    name = "terragrunt-gcp-iam-roles"
     }
   }
   
@@ -32,7 +31,7 @@ remote_state {
 # backup_state {
 #   backend = "remote"
 #   config = {
-#     organization = "acme-org-backup"
+#     organization = "novice-zeng-org-backup"
 #     workspaces = {
 #       name = "backup-terragrunt-${replace(path_relative_to_include(), "/", "-")}"
 #     }
@@ -65,15 +64,9 @@ provider "google" {
 }
 EOF
 }
-      version = "~> 5.0"
-    }
-  }
-}
-EOF
-}
 
 # Common inputs inherited by all child modules
 inputs = {
   # GCP project ID - shared across all services (IAM, VMs, GKE, etc.)
-  project_id = "acme-gcp-prod-12345"
+  project_id = "project-novice-486516"
 }
