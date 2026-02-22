@@ -8,9 +8,9 @@ module "vm_roles" {
   vm_role_assignments = var.vm_role_assignments
 }
 
-module "storage_roles" {
-  source = "../storage"
+# module "storage_roles" {
+#   source = "../storage"
   
-  project_id                = var.project_id
-  storage_role_assignments = var.storage_role_assignments
-}
+#   project_id                = var.project_id
+#   storage_role_assignments = var.storage_role_assignments
+# }
