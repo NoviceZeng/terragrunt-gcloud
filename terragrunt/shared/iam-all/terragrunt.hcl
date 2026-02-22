@@ -1,6 +1,7 @@
 # Include root configuration
 include "root" {
-  path = find_in_parent_folders("root.hcl")
+  path   = find_in_parent_folders("root.hcl")
+  expose = true
 }
 
 # Use both VM and Storage IAM modules together
@@ -10,6 +11,9 @@ terraform {
 
 # All IAM role assignments in one place
 inputs = {
+  # Project ID for this deployment
+  project_id = "project-novice-486516"
+
   # VM role assignments
   vm_role_assignments = {
     role_id = "vm-admin"

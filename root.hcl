@@ -1,29 +1,21 @@
 # Root Terragrunt configuration
 # This file contains common configuration that can be inherited by child terragrunt.hcl files
 
-# Terraform Cloud backend configuration
-# Store state files in app.terraform.io
-remote_state {
-  backend = "remote"
-  
-  config = {
-    # Your Terraform Cloud organization name
-    organization = "novice-zeng-org"
+# Terraform Cloud backend configuration (manual generation for correct syntax)
+generate "backend" {
+  path      = "backend.tf"
+  if_exists = "overwrite_terragrunt"
+  contents  = <<EOF
+terraform {
+  backend "remote" {
+    organization = "novicezeng"
     
-    # Workspace naming: Uses path to create unique workspace per service
-    # Examples:
-    #   - terragrunt-shared-iam
-    #   - terragrunt-us-central1-dev-vms
-    #   - terragrunt-us-central1-prod-gke
-    workspaces = {
+    workspaces {
       name = "terragrunt-${replace(path_relative_to_include(), "/", "-")}"
     }
   }
-  
-  generate = {
-    path      = "backend.tf"
-    if_exists = "overwrite_terragrunt"
-  }
+}
+EOF
 }
 
 # Backup bucket for disaster recovery (optional but recommended)
