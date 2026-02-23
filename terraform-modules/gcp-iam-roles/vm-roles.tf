@@ -3,7 +3,7 @@
 
 # VM Viewer - Read-only access to VMs
 resource "google_project_iam_custom_role" "vm_viewer" {
-  role_id     = "vm-viewer"
+  role_id     = "vm_viewer"
   title       = "VM Viewer"
   description = "Read-only access to view compute instances and their details"
   
@@ -25,7 +25,7 @@ resource "google_project_iam_custom_role" "vm_viewer" {
 
 # VM Admin - Full control over VMs
 resource "google_project_iam_custom_role" "vm_admin" {
-  role_id     = "vm-admin"
+  role_id     = "vm_admin"
   title       = "VM Admin"
   description = "Full administrative access to compute instances"
   
@@ -82,7 +82,7 @@ resource "google_project_iam_custom_role" "vm_admin" {
 
 # VM Developer - Create and manage development VMs
 resource "google_project_iam_custom_role" "vm_developer" {
-  role_id     = "vm-developer"
+  role_id     = "vm_developer"
   title       = "VM Developer"
   description = "Developer access to create, modify, and SSH into VMs"
   
@@ -127,9 +127,9 @@ resource "google_project_iam_custom_role" "vm_developer" {
 # Role assignments map for lookup
 locals {
   vm_roles_map = {
-    "vm-viewer"    = google_project_iam_custom_role.vm_viewer
-    "vm-admin"     = google_project_iam_custom_role.vm_admin
-    "vm-developer" = google_project_iam_custom_role.vm_developer
+    "vm_viewer"    = google_project_iam_custom_role.vm_viewer
+    "vm_admin"     = google_project_iam_custom_role.vm_admin
+    "vm_developer" = google_project_iam_custom_role.vm_developer
   }
 }
 

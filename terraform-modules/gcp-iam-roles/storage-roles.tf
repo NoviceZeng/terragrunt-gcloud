@@ -3,7 +3,7 @@
 
 # Storage Viewer - Read-only access to buckets and objects
 resource "google_project_iam_custom_role" "storage_viewer" {
-  role_id     = "storage-viewer"
+  role_id     = "storage_viewer"
   title       = "Storage Viewer"
   description = "Read-only access to view Cloud Storage buckets and objects"
   
@@ -21,7 +21,7 @@ resource "google_project_iam_custom_role" "storage_viewer" {
 
 # Storage Editor - Read and write access to buckets and objects
 resource "google_project_iam_custom_role" "storage_editor" {
-  role_id     = "storage-editor"
+  role_id     = "storage_editor"
   title       = "Storage Editor"
   description = "Read and write access to Cloud Storage buckets and objects"
   
@@ -45,7 +45,7 @@ resource "google_project_iam_custom_role" "storage_editor" {
 
 # Storage Admin - Full control over buckets and objects
 resource "google_project_iam_custom_role" "storage_admin" {
-  role_id     = "storage-admin"
+  role_id     = "storage_admin"
   title       = "Storage Admin"
   description = "Full administrative access to Cloud Storage buckets and objects"
   
@@ -75,7 +75,7 @@ resource "google_project_iam_custom_role" "storage_admin" {
 
 # Storage Data Pipeline - Read/write for ETL and data processing
 resource "google_project_iam_custom_role" "storage_data_pipeline" {
-  role_id     = "storage-data-pipeline"
+  role_id     = "storage_data_pipeline"
   title       = "Storage Data Pipeline"
   description = "Read and write access for ETL and data processing pipelines"
   
@@ -99,10 +99,10 @@ resource "google_project_iam_custom_role" "storage_data_pipeline" {
 # Role assignments map for lookup
 locals {
   storage_roles_map = {
-    "storage-viewer"        = google_project_iam_custom_role.storage_viewer
-    "storage-editor"        = google_project_iam_custom_role.storage_editor
-    "storage-admin"         = google_project_iam_custom_role.storage_admin
-    "storage-data-pipeline" = google_project_iam_custom_role.storage_data_pipeline
+    "storage_viewer"        = google_project_iam_custom_role.storage_viewer
+    "storage_editor"        = google_project_iam_custom_role.storage_editor
+    "storage_admin"         = google_project_iam_custom_role.storage_admin
+    "storage_data_pipeline" = google_project_iam_custom_role.storage_data_pipeline
   }
 }
 

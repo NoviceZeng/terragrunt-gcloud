@@ -6,7 +6,7 @@ include "root" {
 
 # Use both VM and Storage IAM modules together
 terraform {
-  source = "../../../terraform-modules/gcp-iam-roles/all-in-one"
+  source = "../../../terraform-modules/gcp-iam-roles"
 }
 
 # All IAM role assignments in one place
@@ -16,7 +16,7 @@ inputs = {
 
   # VM role assignments
   vm_role_assignments = {
-    role_id = "vm-admin"
+    role_id = "vm_admin"
     
     members = [
       "user:cloud-ops@example.com",
@@ -30,7 +30,7 @@ inputs = {
   
   # Storage role assignments
   storage_role_assignments = {
-    role_id = "storage-data-pipeline"
+    role_id = "storage_data_pipeline"
     
     members = [
       "user:data-engineer@example.com",

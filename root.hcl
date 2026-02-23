@@ -1,18 +1,21 @@
 # Root Terragrunt configuration
 # This file contains common configuration that can be inherited by child terragrunt.hcl files
 
-# Terraform Cloud backend configuration (manual generation for correct syntax)
+# Terraform Cloud backend configuration (local execution mode)
 generate "backend" {
   path      = "backend.tf"
   if_exists = "overwrite_terragrunt"
   contents  = <<EOF
 terraform {
-  backend "remote" {
+  cloud {
     organization = "novicezeng"
     
     workspaces {
       name = "terragrunt-${replace(path_relative_to_include(), "/", "-")}"
     }
+    
+    # Use local execution so Terragrunt inputs work
+    # State stored in Terraform Cloud, but runs locally
   }
 }
 EOF
@@ -47,8 +50,8 @@ terraform {
 }
 
 provider "google" {
-  # Best Practice: Use service account for production
-  # Set GOOGLE_APPLICATION_CREDENTIALS env var or use ADC
+  # Use service account credentials from Terraform Cloud
+  # Set GOOGLE_CREDENTIALS env var in Terraform Cloud
   project = var.project_id
   
   # Optional: Set default region
