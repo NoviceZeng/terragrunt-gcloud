@@ -145,6 +145,10 @@ resource "google_project_iam_member" "vm_members" {
 # Assign VM roles to service accounts
 resource "google_project_iam_member" "vm_service_accounts" {
   count = length(var.vm_role_assignments.service_account_emails)
+
+  depends_on = [
+    google_service_account.vm_automation
+  ]
   
   project = var.project_id
   role    = local.vm_roles_map[var.vm_role_assignments.role_id].name

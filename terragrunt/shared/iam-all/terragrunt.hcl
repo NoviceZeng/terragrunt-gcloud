@@ -19,12 +19,12 @@ inputs = {
     role_id = "vm_admin"
     
     members = [
-      "user:cloud-ops@example.com",
-      "group:platform-team@example.com",
+      "user:novice.tseng@gmail.com",
+      #"group:platform-team@example.com",
     ]
     
     service_account_emails = [
-      "vm-automation@acme-gcp-prod-12345.iam.gserviceaccount.com",
+      "vm-automation@project-novice-486516.iam.gserviceaccount.com",
     ]
   }
   
@@ -38,7 +38,7 @@ inputs = {
     ]
     
     service_account_emails = [
-      "etl-job@acme-gcp-prod-12345.iam.gserviceaccount.com",
+      "etl-job@project-novice-486516.iam.gserviceaccount.com",
     ]
   }
 }

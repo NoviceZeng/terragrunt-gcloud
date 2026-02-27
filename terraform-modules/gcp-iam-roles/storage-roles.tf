@@ -118,6 +118,11 @@ resource "google_project_iam_member" "storage_members" {
 # Assign storage roles to service accounts
 resource "google_project_iam_member" "storage_service_accounts" {
   count = length(var.storage_role_assignments.service_account_emails)
+
+  depends_on = [
+    google_service_account.vm_automation,
+    google_service_account.etl_job
+  ]
   
   project = var.project_id
   role    = local.storage_roles_map[var.storage_role_assignments.role_id].name
