@@ -20,7 +20,6 @@ inputs = {
     
     members = [
       "user:novice.tseng@gmail.com",
-      #"group:platform-team@example.com",
     ]
     
     service_account_emails = [
@@ -33,8 +32,7 @@ inputs = {
     role_id = "storage_data_pipeline"
     
     members = [
-      "user:data-engineer@example.com",
-      "group:data-team@example.com",
+      "user:novice.zeng@gmail.com",
     ]
     
     service_account_emails = [
