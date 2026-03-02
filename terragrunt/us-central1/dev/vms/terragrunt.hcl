@@ -13,6 +13,15 @@ terraform {
   source = "../../../../terraform-modules/gcp-vm"
 }
 
+dependency "network" {
+  config_path = "../network"
+
+  mock_outputs = {
+    network_name = "acme-vpc-us-central1"
+  }
+  mock_outputs_allowed_terraform_commands = ["validate", "plan"]
+}
+
 locals {
   # Environment identifier
   env = "dev"
@@ -20,23 +29,6 @@ locals {
   # Get region config
   region_vars = read_terragrunt_config(find_in_parent_folders("region.hcl"))
   region      = local.region_vars.locals.region
-  
-  # Environment settings (dynamic based on env)
-  subnet = "projects/your-gcp-project-id/regions/${local.region}/subnetworks/${local.env}-subnet"
-  
-  # Disk sizes by role
-  disk_sizes = {
-    web      = 20
-    app      = 30
-    database = 50
-  }
-  
-  # Tags by role (using env variable for consistency)
-  role_tags = {
-    web      = ["web", local.env, "http-server", "https-server"]
-    app      = ["app", local.env]
-    database = ["database", local.env]
-  }
   
   # Parse CSV
   csv_content = file("${get_terragrunt_dir()}/vms.csv")
@@ -50,14 +42,18 @@ locals {
     machine_type = vm[2]
     zone         = vm[3]
     ip           = vm[4]
-    bootdisksize = local.disk_sizes[vm[5]]
-    subnetname   = local.subnet
-    tags         = local.role_tags[vm[5]]
+    disk         = vm[5] != "" ? vm[5] : null
+    subnetname   = vm[6] != "" ? vm[6] : null
+    bootimage    = vm[7] != "" ? vm[7] : null
+    bootdisksize = vm[8] != "" ? tonumber(vm[8]) : null
+    tags         = vm[9] != "" ? split("|", vm[9]) : []
   }]
 }
 
 inputs = {
   vms = local.vms
+
+  network = dependency.network.outputs.network_name
   
   # Dynamic naming based on region and env
   firewall_name_prefix   = "${local.region}-${local.env}"

@@ -13,6 +13,7 @@ resource "google_compute_instance" "vm" {
     initialize_params {
       image = lookup(each.value, "bootimage", null)
       size  = lookup(each.value, "bootdisksize", 0)
+      type  = lookup(each.value, "disk", null)
     }
   }
 
@@ -22,7 +23,7 @@ resource "google_compute_instance" "vm" {
     
     # Only add external IP if enabled
     dynamic "access_config" {
-      for_each = lookup(each.value, "enable_external_ip", true) ? [1] : []
+      for_each = lookup(each.value, "enable_external_ip", false) ? [1] : []
       content {}
     }
   }

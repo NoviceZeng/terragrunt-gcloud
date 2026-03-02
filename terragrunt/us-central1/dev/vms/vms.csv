@@ -1,4 +1,2 @@
-name,hostname,machine_type,zone,ip,role
-dev-web-server-01,web01.dev.example.com,e2-medium,us-central1-a,10.0.1.10,web
-dev-app-server-01,app01.dev.example.com,e2-standard-2,us-central1-a,10.0.1.20,app
-dev-db-server-01,db01.dev.example.com,e2-standard-4,us-central1-b,10.0.1.30,database
+name,hostname,machine_type,zone,ip,disk,subnet,bootdisk,bootdisksize,tags
+dev-web-server-01,web01.dev.example.com,e2-medium,us-central1-a,10.0.1.10,pd-balanced,projects/project-novice-486516/regions/us-central1/subnetworks/dev-vm-subnet,projects/ubuntu-os-cloud/global/images/family/ubuntu-2404-lts,20,web|dev|http-server|https-server
