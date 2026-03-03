@@ -3,11 +3,6 @@ include "root" {
   path = find_in_parent_folders("root.hcl")
 }
 
-# Include region configuration
-include "region" {
-  path = find_in_parent_folders("region.hcl")
-}
-
 terraform {
   source = "../../../../terraform-modules/gcp-network"
 }

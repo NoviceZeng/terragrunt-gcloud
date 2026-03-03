@@ -49,10 +49,18 @@ terraform {
   }
 }
 
+variable "google_credentials" {
+  description = "Optional GCP credentials JSON content. If null, provider falls back to ADC."
+  type        = string
+  default     = null
+  sensitive   = true
+}
+
 provider "google" {
   # Use service account credentials from Terraform Cloud
   # Set GOOGLE_CREDENTIALS env var in Terraform Cloud
   project = var.project_id
+  credentials = var.google_credentials
   
   # Optional: Set default region
   region = "us-central1"
@@ -61,7 +69,15 @@ EOF
 }
 
 # Common inputs inherited by all child modules
+locals {
+  google_credentials_from_env = get_env("GOOGLE_CREDENTIALS", "")
+}
+
 inputs = {
   # GCP project ID - shared across all services (IAM, VMs, GKE, etc.)
   project_id = "project-novice-486516"
+
+  # Optional credentials for Terraform Cloud remote runs.
+  # If empty, provider will fall back to Application Default Credentials (ADC).
+  google_credentials = local.google_credentials_from_env != "" ? local.google_credentials_from_env : null
 }
