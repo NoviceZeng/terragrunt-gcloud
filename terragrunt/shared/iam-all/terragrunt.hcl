@@ -19,7 +19,7 @@ inputs = {
     role_id = "vm_admin"
     
     members = [
-      "user:novice.tseng@gmail.com",
+      "user:test1@gmail.com",
     ]
     
     service_account_emails = [
@@ -32,7 +32,7 @@ inputs = {
     role_id = "storage_data_pipeline"
     
     members = [
-      "user:novice.zeng@gmail.com",
+      "user:test2@gmail.com",
     ]
     
     service_account_emails = [
