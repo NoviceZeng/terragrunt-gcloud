@@ -26,7 +26,7 @@ terragrunt apply
 ## 📁 Structure
 
 ```
-terraform-gcloud/
+terragrunt-gcloud/
 ├── docs/                       # 📖 Documentation
 ├── terraform-modules/          # 🔧 Reusable Terraform modules
 │   ├── gcp-vm/                # VMs
